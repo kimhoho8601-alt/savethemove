@@ -10,7 +10,7 @@ const openInvitation=()=>{
     site.classList.add('visible');
     site.setAttribute('aria-hidden','false');
     document.querySelector('#overview-title').focus?.();
-  },1480)
+  },1880)
 };
 document.querySelector('#openInvitation').addEventListener('click',openInvitation);
 document.querySelector('#openInvitationText').addEventListener('click',openInvitation);
