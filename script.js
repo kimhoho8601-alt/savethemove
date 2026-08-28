@@ -1,6 +1,17 @@
 const invitation=document.querySelector('#invitation');
 const site=document.querySelector('#site');
-const openInvitation=()=>{invitation.classList.add('opening');setTimeout(()=>{invitation.classList.add('hidden');site.classList.add('visible');site.setAttribute('aria-hidden','false');document.querySelector('#overview-title').focus?.()},850)};
+let invitationOpened=false;
+const openInvitation=()=>{
+  if(invitationOpened)return;
+  invitationOpened=true;
+  invitation.classList.add('opening');
+  setTimeout(()=>{
+    invitation.classList.add('hidden');
+    site.classList.add('visible');
+    site.setAttribute('aria-hidden','false');
+    document.querySelector('#overview-title').focus?.();
+  },1480)
+};
 document.querySelector('#openInvitation').addEventListener('click',openInvitation);
 document.querySelector('#openInvitationText').addEventListener('click',openInvitation);
 
