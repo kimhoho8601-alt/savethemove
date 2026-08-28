@@ -1,14 +1,41 @@
 const invitation=document.querySelector('#invitation');
 const site=document.querySelector('#site');
+const heroVideo=document.querySelector('.hero-video');
+
+if(heroVideo){
+  heroVideo.muted=true;
+  heroVideo.defaultMuted=true;
+  heroVideo.setAttribute('muted','');
+  heroVideo.setAttribute('playsinline','');
+  heroVideo.setAttribute('webkit-playsinline','');
+  heroVideo.src='assets/savethemove-welcome.mp4';
+  heroVideo.load();
+}
+
+const ensureHeroVideoPlaying=()=>{
+  if(!heroVideo)return;
+  heroVideo.muted=true;
+  const playPromise=heroVideo.play();
+  if(playPromise?.catch)playPromise.catch(()=>{});
+};
+
+ensureHeroVideoPlaying();
+
+document.addEventListener('visibilitychange',()=>{
+  if(!document.hidden)ensureHeroVideoPlaying();
+});
+
 let invitationOpened=false;
 const openInvitation=()=>{
   if(invitationOpened)return;
   invitationOpened=true;
+  ensureHeroVideoPlaying();
   invitation.classList.add('opening');
   setTimeout(()=>{
     invitation.classList.add('hidden');
     site.classList.add('visible');
     site.setAttribute('aria-hidden','false');
+    ensureHeroVideoPlaying();
     document.querySelector('#overview-title').focus?.();
   },1880)
 };
